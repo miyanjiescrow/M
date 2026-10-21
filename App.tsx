@@ -7,7 +7,7 @@ import {
   Clock,
   CheckCircle2,
   AlertTriangle,
-  Users,
+  Users as UsersIcon,
   Search,
   PlusCircle,
   Download,
@@ -15,11 +15,11 @@ import {
   Trash2,
   Edit3,
   Copy,
-  ExternalLink,
+  // ExternalLink,
   Smartphone,
   Layers,
   ArrowRight,
-  ArrowLeft,
+  // ArrowLeft,
   X,
   Check,
   Info,
@@ -27,15 +27,15 @@ import {
   TrendingUp,
   Award,
   MessageSquare,
-  Paperclip,
+  // Paperclip,
   Share2,
   Lock,
-  Unlock,
+  // Unlock,
   Building2,
-  FileCheck2,
+  // FileCheck2,
   RefreshCw,
-  LogOut,
-  ChevronDown,
+  // LogOut,
+  // ChevronDown,
   ChevronRight,
   Eye,
   Percent,
@@ -46,7 +46,7 @@ import {
   Scale,
   Bot,
   Sparkles,
-  SmartphoneNfc,
+  // SmartphoneNfc,
   UploadCloud,
   FileCheck,
   CheckCheck,
@@ -62,6 +62,7 @@ import {
 // ====================================================
 
 import { UserProfile, Contract, WalletTransaction, DisputeMessage, DisputeCase, AffiliateStats, AppNotification } from './types';
+import { users, contracts, transactions, disputes } from './db';
 
 export default function App() {
   // Navigation & View Mode
@@ -70,6 +71,7 @@ export default function App() {
   const [profileSubTab, setProfileSubTab] = useState<'kyc' | 'telegram_sync' | 'roles'>('kyc');
   const [viewMode, setViewMode] = useState<'desktop' | 'telegram'>('desktop');
   const [isTelegramClient, setIsTelegramClient] = useState(false);
+  const [showBotSimulator, setShowBotSimulator] = useState(false);
 
   // Global Theme State ('light' | 'dark')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -837,7 +839,7 @@ export default function App() {
       case 'awaiting_payment':
         return { text: 'امضا شده - در انتظار تامین وجه', color: 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800', icon: CreditCard };
       case 'pending_party_b':
-        return { text: 'در انتظار تایید طرف دوم', color: 'bg-orange-50 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800', icon: Users };
+        return { text: 'در انتظار تایید طرف دوم', color: 'bg-orange-50 dark:bg-orange-950/60 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800', icon: UsersIcon };
       case 'completed':
         return { text: 'تکمیل و تسویه شده', color: 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800', icon: CheckCircle2 };
       case 'in_dispute':
@@ -1600,7 +1602,7 @@ export default function App() {
                 servicesSubTab === 'affiliate' ? 'bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-xs' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <Users className="w-4 h-4" />
+              <UsersIcon className="w-4 h-4" />
               سامانه سفیران (Affiliate)
             </button>
           </div>
@@ -1788,7 +1790,7 @@ export default function App() {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs text-center transition-colors">
-                    <Users className="w-5 h-5 text-blue-700 dark:text-blue-400 mx-auto mb-1.5" />
+                    <UsersIcon className="w-5 h-5 text-blue-700 dark:text-blue-400 mx-auto mb-1.5" />
                     <div className="text-lg font-bold text-slate-900 dark:text-white">{affiliateStats.total_invited} نفر</div>
                     <span className="text-xs text-slate-500 dark:text-slate-400">کاربران ثبت‌نامی</span>
                   </div>
