@@ -1009,7 +1009,7 @@ export default function App() {
                   <span className="text-slate-500 dark:text-slate-400">هماهنگی ربات تلگرام:</span>
                   <span className="font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    همگام با @MiyanjiBot
+                    همگام با @mianji_ir_bot
                   </span>
                 </div>
               </div>
@@ -1027,7 +1027,7 @@ export default function App() {
                   <h3 className="font-bold text-slate-900 dark:text-white text-sm md:text-base">هماهنگی کامل وب‌اپلیکیشن و ربات تلگرام</h3>
                   <span className="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/40">سینک بلادرنگ</span>
                 </div>
-                <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">تمامی قراردادها، موجودی کیف‌پول و اعلان‌ها در ربات @MiyanjiBot و نسخه وب هماهنگ هستند.</p>
+                <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">تمامی قراردادها، موجودی کیف‌پول و اعلان‌ها در ربات @mianji_ir_bot و نسخه وب هماهنگ هستند.</p>
               </div>
             </div>
             <div className="flex items-center gap-2 w-full md:w-auto">

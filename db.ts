@@ -1,6 +1,6 @@
 import { UserProfile, Contract, WalletTransaction, DisputeCase } from './types';
 
-export let users: UserProfile[] = [
+export const users: UserProfile[] = [
   {
     id: 1802649782,
     telegram_id: 1802649782,
