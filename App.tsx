@@ -183,6 +183,7 @@ export default function App() {
       as_draft: false
     };
   });
+  const [activeFormStep, setActiveFormStep] = useState(1);
 
   useEffect(() => {
     localStorage.setItem('miyanji_new_contract_form', JSON.stringify(newContractForm));
@@ -1435,75 +1436,80 @@ export default function App() {
       {/* New Contract Wizard Tab */}
       {activeTab === 'new_contract' && (
         <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xs p-6 space-y-6 transition-colors">
-          {/* Professional Card Header */}
-          <div className="flex items-center gap-2.5 pb-4 border-b border-slate-100 dark:border-slate-800">
-            <div className="w-2.5 h-6 bg-gradient-to-b from-blue-600 to-blue-800 rounded-full" />
-            <div>
-              <h2 className="text-base font-bold text-slate-900 dark:text-white">فرم ثبت قرارداد و معامله امن اسکرو</h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">ثبت رسمی مشخصات و ارسال مستقیم برای طرف دوم معامله</p>
+          <div className="pb-4 border-b border-slate-100 dark:border-slate-800">
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">ثبت قرارداد جدید (مرحله {activeFormStep} از ۳)</h2>
+            <div className="flex gap-2 mt-3">
+              {[1, 2, 3].map(step => (
+                <div key={step} className={`h-1.5 flex-1 rounded-full ${step <= activeFormStep ? 'bg-blue-700' : 'bg-slate-200 dark:bg-slate-700'}`} />
+              ))}
             </div>
           </div>
 
-          <form onSubmit={handleCreateContract} className="space-y-4">
-            <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">عنوان کامل قرارداد یا معامله *</label>
-              <input
-                type="text"
-                placeholder="مثال: طراحی وبسایت فروشگاهی با درگاه پرداخت و پنل ادمین"
-                value={newContractForm.title}
-                onChange={(e) => setNewContractForm({ ...newContractForm, title: e.target.value })}
-                className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-blue-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition"
-                required
-              />
+          <form onSubmit={handleCreateContract} className="space-y-6">
+            {activeFormStep === 1 && (
+              <div className="space-y-4 animate-in fade-in zoom-in-95 duration-200">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">عنوان قرارداد *</label>
+                  <input type="text" value={newContractForm.title} onChange={(e) => setNewContractForm({ ...newContractForm, title: e.target.value })} className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl" required />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">دسته‌بندی</label>
+                    <select value={newContractForm.category} onChange={(e) => setNewContractForm({ ...newContractForm, category: e.target.value as any })} className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl">
+                      <option value="DEV">توسعه نرم‌افزار</option>
+                      <option value="DS">طراحی</option>
+                      <option value="CNT">محتوا</option>
+                      <option value="MKT">مارکتینگ</option>
+                      <option value="GEN">عمومی</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">مهلت (روز) *</label>
+                    <input type="number" min="1" value={newContractForm.deadline} onChange={(e) => setNewContractForm({ ...newContractForm, deadline: e.target.value })} className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl" required />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeFormStep === 2 && (
+              <div className="space-y-4 animate-in fade-in zoom-in-95 duration-200">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">مبلغ قرارداد (تومان) *</label>
+                  <input type="number" value={newContractForm.amount} onChange={(e) => setNewContractForm({ ...newContractForm, amount: e.target.value })} className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl" required />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">توضیحات تکمیلی</label>
+                  <textarea rows={3} value={newContractForm.description} onChange={(e) => setNewContractForm({ ...newContractForm, description: e.target.value })} className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl" />
+                </div>
+              </div>
+            )}
+
+            {activeFormStep === 3 && (
+              <div className="space-y-4 animate-in fade-in zoom-in-95 duration-200">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">نام طرف مقابل *</label>
+                  <input type="text" value={newContractForm.counterparty_name} onChange={(e) => setNewContractForm({ ...newContractForm, counterparty_name: e.target.value })} className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl" required />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">شماره همراه طرف مقابل *</label>
+                  <input type="tel" value={newContractForm.counterparty_phone} onChange={(e) => setNewContractForm({ ...newContractForm, counterparty_phone: e.target.value })} className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl" required />
+                </div>
+              </div>
+            )}
+
+            <div className="flex gap-3 pt-4">
+              {activeFormStep > 1 && (
+                <button type="button" onClick={() => setActiveFormStep(s => s - 1)} className="flex-1 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold">بازگشت</button>
+              )}
+              {activeFormStep < 3 ? (
+                <button type="button" onClick={() => setActiveFormStep(s => s + 1)} className="flex-1 py-3 bg-blue-700 text-white rounded-xl text-xs font-bold">مرحله بعد</button>
+              ) : (
+                <button type="submit" className="flex-1 py-3 bg-emerald-600 text-white rounded-xl text-xs font-bold">ثبت نهایی قرارداد</button>
+              )}
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">دسته‌بندی موضوعی</label>
-                <select
-                  value={newContractForm.category}
-                  onChange={(e) => setNewContractForm({ ...newContractForm, category: e.target.value as any })}
-                  className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-blue-700 text-slate-900 dark:text-white"
-                >
-                  <option value="DEV">توسعه نرم‌افزار، وب و ربات تلگرام</option>
-                  <option value="DS">طراحی هویت بصری و گرافیک</option>
-                  <option value="CNT">تولید محتوا، ترجمه و سئو</option>
-                  <option value="MKT">دیجیتال مارکتینگ و تبلیغات</option>
-                  <option value="GEN">معاملات عمومی و کالای دیجیتال</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">مهلت تحویل (روز کاری) *</label>
-                <input
-                  type="number"
-                  min="1"
-                  max="180"
-                  value={newContractForm.deadline}
-                  onChange={(e) => setNewContractForm({ ...newContractForm, deadline: e.target.value })}
-                  className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-blue-700 text-slate-900 dark:text-white"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">مبلغ کل قرارداد (تومان) *</label>
-                <input
-                  type="number"
-                  placeholder="مثال: 15000000"
-                  value={newContractForm.amount}
-                  onChange={(e) => setNewContractForm({ ...newContractForm, amount: e.target.value })}
-                  className="w-full text-xs p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-blue-700 text-slate-900 dark:text-white"
-                  required
-                />
-                {newContractForm.amount && (
-                  <span className="text-[11px] text-blue-700 dark:text-blue-400 font-semibold block mt-1">
-                    {Number(newContractForm.amount).toLocaleString('fa-IR')} تومان
-                  </span>
-                )}
-              </div>
+          </form>
+        </div>
+      )}
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">پرداخت‌کننده کارمزد (۱۰٪)</label>
