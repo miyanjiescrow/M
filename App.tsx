@@ -2999,10 +2999,10 @@ export default function App() {
               <div className="bg-gradient-to-br from-blue-700 to-indigo-800 text-white p-4 rounded-2xl shadow-md space-y-2">
                 <div className="flex items-center justify-between text-xs text-blue-100">
                   <span>مبلغ توافق‌شده قرارداد:</span>
-                  <span>کارمزد میانجی: {(selectedContract.amount * 0.015).toLocaleString('fa-IR')} تومان (۱.۵٪)</span>
+                  <span>کارمزد میانجی: {((selectedContract?.amount ?? 0) * 0.015).toLocaleString('fa-IR')} تومان (۱.۵٪)</span>
                 </div>
                 <div className="text-xl md:text-2xl font-bold font-mono tracking-tight">
-                  {selectedContract.amount.toLocaleString('fa-IR')} <span className="text-xs font-normal text-blue-200">تومان</span>
+                  {(selectedContract?.amount ?? 0).toLocaleString('fa-IR')} <span className="text-xs font-normal text-blue-200">تومان</span>
                 </div>
                 <div className="pt-2 border-t border-white/20 flex items-center justify-between text-[11px] text-blue-100">
                   <span className="flex items-center gap-1">
@@ -3011,6 +3011,19 @@ export default function App() {
                   </span>
                   <span>پرداخت‌کننده کارمزد: {selectedContract.commission_payer === 'split' ? 'تسهیم ۵۰-۵۰' : selectedContract.commission_payer === 'employer' ? 'کارفرما' : 'مجری'}</span>
                 </div>
+              </div>
+
+              {/* QR Code Signing Section */}
+              <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl space-y-3">
+                <div className="text-center font-bold text-slate-800 dark:text-white">امضا قرارداد با ربات</div>
+                <div className="flex justify-center">
+                  <div className="w-24 h-24 bg-white rounded-lg p-2 border border-slate-200">
+                      <div className="w-full h-full bg-slate-200 flex items-center justify-center text-[10px] text-slate-500 text-center">QR Code</div>
+                  </div>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 text-center">
+                  برای مشاهده مفاد کامل و امضای قرارداد، این کد را با ربات <strong>@mianji_ir_bot</strong> اسکن کنید.
+                </p>
               </div>
 
               {/* Parties Section */}
@@ -3074,6 +3087,13 @@ export default function App() {
               >
                 <Download className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                 <span>{downloadingPdf === selectedContract.contract_id ? 'در حال صدور PDF...' : 'دانلود قرارداد رسمی PDF'}</span>
+              </button>
+
+              <button
+                onClick={() => setShowDisputeModal(selectedContract)} // Reusing modal for simplicity, or add a dedicated QR state
+                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+              >
+                <span>امضا با QR کد</span>
               </button>
 
               <div className="flex items-center gap-2">
