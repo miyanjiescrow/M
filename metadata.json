@@ -1,0 +1,5 @@
+{
+  "name": "Miyanji Escrow",
+  "description": "Secure escrow service for freelancers and employers.",
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
