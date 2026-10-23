@@ -9,7 +9,4 @@ app.use(express.json());
 // API Routes
 app.use('/api/contracts', contractRoutes);
 
-const PORT = 3000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
-});
+export default app;

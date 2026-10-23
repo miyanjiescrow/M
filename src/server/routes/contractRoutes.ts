@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { db } from '../db';
-import { contracts } from '../db/schema';
-import { EscrowService } from '../services/EscrowService';
+import { db } from '../../db';
+import { contracts } from '../../db/schema';
+import { EscrowService } from '../../services/EscrowService';
 
 const router = Router();
 const escrowService = new EscrowService();

@@ -8,7 +8,7 @@ export class EscrowService {
    * این متد باید در یک تراکنش (Transaction) اجرا شود.
    */
   async lockFunds(contractId: string, buyerId: string, amount: string) {
-    return await db.transaction(async (tx) => {
+    return await db.transaction(async (tx: any) => {
       // ۱. به‌روزرسانی وضعیت قرارداد
       await tx.update(contracts)
         .set({ status: 'active', sellerId: buyerId }) // ساده‌سازی برای نمونه
@@ -34,7 +34,7 @@ export class EscrowService {
    * تسویه نهایی (آزاد سازی وجه برای مجری)
    */
   async releaseFunds(contractId: string, amount: string) {
-    return await db.transaction(async (tx) => {
+    return await db.transaction(async (tx: any) => {
       await tx.update(contracts)
         .set({ status: 'completed' })
         .where(eq(contracts.id, contractId));
