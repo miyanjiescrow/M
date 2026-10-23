@@ -1,4 +1,4 @@
-import { UserProfile, Contract, WalletTransaction, DisputeCase } from './types';
+import { UserProfile, Contract, WalletTransaction, DisputeCase } from '../types';
 
 export const users: UserProfile[] = [
   {
@@ -37,6 +37,7 @@ export const users: UserProfile[] = [
     full_name: 'داور حقوقی میانجی (دکتر کریمی)',
     phone_number: '09120009988',
     national_id: '0055443322',
+    sheba: '',
     role: 'arbitrator',
     wallet_balance: 0,
     escrow_locked_balance: 0,
